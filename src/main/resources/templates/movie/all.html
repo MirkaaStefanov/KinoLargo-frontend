@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кино Ларго - Всички филми</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/noImage.png}">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="main-content">
+  <section class="hero-section">
+    <div class="carousel-container">
+      <div class="carousel-item active" th:if="${!allMovies.isEmpty()}">
+        <img th:src="@{'data:image/jpeg;base64,' + ${allMovies[0].image}}" th:alt="${allMovies[0].name}" class="carousel-img">
+        <div class="carousel-content">
+          <h2 class="carousel-movie-title" th:text="${allMovies[0].name}"></h2>
+          <div class="carousel-buttons">
+            <a href="#" class="btn btn-primary">ГЛЕДАЙ ТРЕЙЛЪР</a>
+            <a href="#" class="btn btn-secondary">КУПИ БИЛЕТИ</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" th:if="${allMovies.isEmpty()}">
+        <img th:src="@{/images/default-hero.jpg}" alt="No Featured Movie" class="carousel-img">
+        <div class="carousel-content">
+          <h2 class="carousel-movie-title">Добре дошли в Кино Ларго!</h2>
+          <p class="carousel-text">Очаквайте скоро нови филми!</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav" th:if="${!allMovies.isEmpty()}">
+      <span class="dot active"></span>
+    </div>
+  </section>
+
+  <section class="movie-section">
+    <h2 class="section-title">ВСИЧКИ ФИЛМИ</h2>
+    <div class="movie-grid">
+      <div class="movie-card" th:each="movie : ${allMovies}">
+        <img th:src="@{'data:image/jpeg;base64,' + ${movie.image}}" th:alt="${movie.name}" class="movie-card-img">
+        <div class="movie-card-info">
+          <h3 class="movie-card-title" th:text="${movie.name}"></h3>
+          <p class="movie-card-genre" th:text="${movie.genre != null ? movie.genre.name : 'Неизвестен жанр'}"></p>
+          <a th:href="@{/movie/{id}(id=${movie.id})}" class="btn btn-details">Виж повече</a>
+        </div>
+      </div>
+
+      <div th:if="${allMovies.isEmpty()}" class="no-data-message-centered">
+        В момента няма налични филми. Моля, проверете по-късно!
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

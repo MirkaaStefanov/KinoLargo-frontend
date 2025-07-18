@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="main-header" th:fragment="header">
+  <div class="header-top">
+    <div class="logo-container">
+      <img th:src="@{/images/kino_largo_logo.png}" alt="Кино Ларго" class="logo">
+    </div>
+    <div class="contact-info">
+      <p>АДРЕС: УЛ.ВАСИЛ ЛЕВСКИ 1 /ГРАДАТА НА БИВШЕТО КИНО/</p>
+      <p>ТЕЛЕФОН: 0887010060</p>
+      <p><i class="fab fa-facebook"></i> FACEBOOK: КИНО "ЛАРГО" ТЪРГОВИЩЕ</p>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#" class="active">Филми</a></li>
+      <li><a href="#">Програма</a></li>
+      <li><a href="#">Новини</a></li>
+      <li><a href="#">Контакти</a></li>
+      <li th:if="${session.sessionToken != null}"><a th:href="@{/movie}">Админ (Филми)</a></li>
+      <li th:if="${session.sessionToken != null}"><a th:href="@{/auth/logout}">Излез</a></li>
+      <li th:if="${session.sessionToken == null}"><a th:href="@{/auth/login}">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+</body>
+</html>

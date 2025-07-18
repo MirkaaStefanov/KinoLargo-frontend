@@ -9,6 +9,6 @@ public enum MovieType {
     D2("2D"),
     D3("3D");
 
-    private final String name;
+    private final String displayName;
 
 }

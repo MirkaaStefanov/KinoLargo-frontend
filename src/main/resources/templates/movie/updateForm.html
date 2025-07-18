@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактиране на филм</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/noImage.png}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="main-content">
+  <div class="form-page-wrapper">
+    <div class="form-page-container">
+      <h1 class="form-page-title">Редактиране на филм</h1>
+
+      <div th:if="${successMessage}" class="form-alert alert-success">
+        <span th:text="${successMessage}"></span>
+      </div>
+      <div th:if="${errorMessage}" class="form-alert alert-danger">
+        <span th:text="${errorMessage}"></span>
+      </div>
+
+      <form th:action="@{/movie/edit/{id}(id=${updateDTO.id})}" th:object="${updateDTO}" method="post" enctype="multipart/form-data" class="styled-form">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+          <label for="name" class="form-label">Заглавие</label>
+          <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Въведете заглавие" required>
+          <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-error-message"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="durationMins" class="form-label">Продължителност (минути)</label>
+          <input type="number" id="durationMins" class="form-control" th:field="*{durationMins}" placeholder="Напр. 120" min="1" required>
+          <p th:if="${#fields.hasErrors('durationMins')}" th:errors="*{durationMins}" class="form-error-message"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="movieType" class="form-label">Тип филм</label>
+          <select id="movieType" class="form-control" th:field="*{movieType}" required>
+            <option value="">Изберете тип</option>
+            <option th:each="type : ${movieTypeEnumValues}"
+                    th:value="${type}" th:text="${type.displayName}"></option>
+          </select>
+          <p th:if="${#fields.hasErrors('movieType')}" th:errors="*{movieType}" class="form-error-message"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="genreName" class="form-label">Жанр</label>
+          <input type="text" id="genreName" class="form-control" th:field="*{genre.name}" placeholder="Напр. Екшън, Драма, Комедия" required>
+          <p th:if="${#fields.hasErrors('genre.name')}" th:errors="*{genre.name}" class="form-error-message"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="price" class="form-label">Цена на билет (лв.)</label>
+          <input type="number" id="price" class="form-control" th:field="*{price}" placeholder="Напр. 12.50" step="0.01" min="0" required>
+          <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="form-error-message"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="imageFile" class="form-label">Постер на филм</label>
+          <input type="file" id="imageFile" name="imageFile" accept="image/*" class="form-control">
+          <small class="form-text-info">Оставете празно, за да запазите текущото изображение.</small>
+          <div th:if="${updateDTO.image != null and !updateDTO.image.isEmpty()}" class="current-image-preview">
+            <p>Текущо изображение:</p>
+            <img th:src="@{'data:image/jpeg;base64,' + ${updateDTO.image}}" alt="Current Movie Poster">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn-form-submit">Запази промените</button>
+        </div>
+
+        <div class="form-link-group">
+          <a th:href="@{/movie}" class="form-link">Обратно към списъка с филми</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}" </footer>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

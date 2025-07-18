@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="main-footer" th:fragment="footer">
+  <div class="footer-content">
+    <div class="footer-section about">
+      <h3>За Кино Ларго</h3>
+      <p>Кино Ларго е вашето място за незабравими филмови преживявания. Насладете се на най-новите заглавия в уютна атмосфера.</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Бързи връзки</h3>
+      <ul>
+        <li><a href="#">Начало</a></li>
+        <li><a href="#">Програма</a></li>
+        <li><a href="#">За нас</a></li>
+        <li><a href="#">Контакти</a></li>
+        <li><a href="#">Политика за поверителност</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h3>Контакти</h3>
+      <p><i class="fas fa-map-marker-alt"></i> УЛ.ВАСИЛ ЛЕВСКИ 1</p>
+      <p><i class="fas fa-phone"></i> 0887010060</p>
+      <p><i class="fas fa-envelope"></i> info@kinolargo.bg</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Кино Ларго. Всички права запазени.</p>
+  </div>
+</footer>
+</body>
+</html>

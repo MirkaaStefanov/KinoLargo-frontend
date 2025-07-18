@@ -3,43 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Добавяне на Регион</title>
-  <link rel="icon" type="image/x-icon" th:href="@{/img/photos/noImage.png}">
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <title>Добавяне на жанр</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/noImage.png}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<div th:replace="~{fragments/header :: navigation-bar}"></div>
+<header th:replace="~{fragments/header :: header}"></header>
 
-<div class="form-page-wrapper">
-  <div class="form-page-container">
-    <h1 class="form-page-title">Добавяне на Нов Регион</h1>
+<div class="main-content">
+  <div class="form-page-wrapper">
+    <div class="form-page-container">
+      <h1 class="form-page-title">Добавяне на жанр</h1>
 
-    <form th:action="@{/regions/submit}" th:object="${region}" method="post" class="styled-form">
-
-      <input type="hidden" th:field="*{id}" />
-
-      <div class="form-group">
-        <label for="name" class="form-label">Име на региона</label>
-        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Напр. Централен, Южен, Морски" required>
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-error-message">Name Error</div>
+      <div th:if="${param.success}" class="form-alert alert-success">
+        Жанрът е добавен успешно!
+      </div>
+      <div th:if="${param.error}" class="form-alert alert-danger">
+        Възникна грешка при добавянето на жанра. Моля, опитайте отново.
       </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn-form-submit">
-          <i class="fas fa-plus-circle"></i> Добави Регион
-        </button>
-      </div>
+      <form th:action="@{/genre/submit}" th:object="${region}" method="post" class="styled-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Име на жанр</label>
+          <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Въведете име на жанр" required>
+        </div>
 
-      <div class="form-link-group register-link-group">
-        <a th:href="@{/regions/all}" class="btn-form-secondary">
-          <i class="fas fa-arrow-left"></i> Отказ / Всички Региони
-        </a>
-      </div>
-    </form>
+        <div class="form-group">
+          <button type="submit" class="btn-form-submit">Добави жанр</button>
+        </div>
+
+        <div class="form-link-group">
+          <a th:href="@{/genre/all}" class="form-link">Обратно към списъка с жанрове</a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
+<footer th:replace="~{fragments/footer :: footer}" </footer>
+
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

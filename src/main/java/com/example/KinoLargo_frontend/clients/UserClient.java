@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "hm-users", url = "${backend.base-url}/users")
+@FeignClient(name = "kino-users", url = "${backend.base-url}/users")
 public interface UserClient {
 
     @GetMapping("/me")

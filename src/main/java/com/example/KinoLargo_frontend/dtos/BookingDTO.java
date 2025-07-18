@@ -1,6 +1,7 @@
 package com.example.KinoLargo_frontend.dtos;
 
 import com.example.KinoLargo_frontend.dtos.auth.PublicUserDTO;
+import com.example.KinoLargo_frontend.enums.BookingType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.io.IOException;
 
-@FeignClient(name = "restaurant-authentication", url = "${backend.base-url}/auth")
+@FeignClient(name = "kino-authentication", url = "${backend.base-url}/auth")
 public interface AuthenticationClient {
 
     @PostMapping("/register")

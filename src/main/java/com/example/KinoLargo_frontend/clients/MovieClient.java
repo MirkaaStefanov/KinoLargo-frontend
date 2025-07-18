@@ -1,8 +1,8 @@
 package com.example.KinoLargo_frontend.clients;
 
 import com.example.KinoLargo_frontend.dtos.GenreDTO;
+import com.example.KinoLargo_frontend.dtos.MovieDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,24 +13,22 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
-@FeignClient(name = "kino-genre", url = "${backend.base-url}/genres")
-public interface GenreClient {
+@FeignClient(name = "kino-movies", url = "${backend.base-url}/movies")
+public interface MovieClient {
 
     @PostMapping("/save")
-    GenreDTO save(@RequestBody GenreDTO genreDTO, @RequestHeader(value = "Authorization", required = false) String auth);
-
+    MovieDTO save(@RequestBody MovieDTO movieDTO, @RequestHeader(value = "Authorization", required = false) String auth);
 
     @GetMapping("/all")
-    List<GenreDTO> findAll(@RequestHeader(value = "Authorization", required = false) String auth);
+    List<MovieDTO> findAll(@RequestHeader(value = "Authorization", required = false) String auth);
 
     @GetMapping("/findById/{id}")
-    GenreDTO findById(@PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String auth);
+    MovieDTO findById(@PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String auth);
 
     @PutMapping("/edit/{id}")
-    GenreDTO update(@PathVariable Long id, @RequestBody GenreDTO genreDTO, @RequestHeader(value = "Authorization", required = false) String auth);
+    MovieDTO update(@PathVariable Long id, @RequestBody MovieDTO movieDTO, @RequestHeader(value = "Authorization", required = false) String auth);
 
     @DeleteMapping("/delete/{id}")
     String delete(@PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String auth);
-
 
 }
